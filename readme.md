@@ -479,7 +479,7 @@ $$T_k=\sum_{\ell=1}^{d}\frac{C_{k\ell}^2}{M\lambda_\ell}.$$
 
 The overall test statistic is the maximum over all possible break locations:
 
-$$T_{\max}=\max_{1\leq k<M}T_k.$$
+$$T_{\max}=\max_{1\leq k \lt M}T_k.$$
 
 **Table 5. Projection-based change-point test for the monthly mean log-volatility function.**
 
