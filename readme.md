@@ -10,9 +10,7 @@ This hypothesis tests whether Tesla's mean intraday log-volatility proxy curve i
 
 The null hypothesis is defined relative to the overall sample mean level. Let
 
-$$
-\mu(t)=E[Y_i(t)]
-$$
+$$\mu(t)=E[Y_i(t)]$$
 
 denote the mean intraday log-volatility curve, and let
 
@@ -24,42 +22,21 @@ denote the flat mean level. In the empirical implementation, this flat level is 
 
 The null hypothesis is that the mean log-volatility proxy curve is constant across intraday time:
 
-$$
-H_0:\mu(t)=\mu_0,
-\qquad \forall t\in\mathcal{T}.
-$$
+$$H_0:\mu(t)=\mu_0,\qquad \forall t\in\mathcal{T}.$$
 
 The alternative hypothesis is that the mean curve deviates from this flat level for at least some intraday time point:
 
-$$
-H_1:\mu(t)\neq \mu_0
-\quad \text{for some } t\in\mathcal{T}.
-$$
+$$H_1:\mu(t)\neq \mu_0 \quad \text{for some } t\in\mathcal{T}.$$
 
 #### Global Functional Test Results
 
 The global hypothesis is tested using a one-sample functional $L^2$-norm statistic. Let
 
-$$
-\bar{Y}(t)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-Y_i(t)
-$$
+$$\bar{Y}(t)=\frac{1}{n}\sum_{i=1}^{n}Y_i(t)$$
 
 denote the sample mean log-volatility curve. The test statistic is
 
-$$
-T
-=
-n
-\int_{\mathcal{T}}
-\left[
-\bar{Y}(t)-\hat{\mu}_0
-\right]^2
-\,dt.
-$$
+$$T=n\int_{\mathcal{T}}\left[\bar{Y}(t)-\hat{\mu}_0\right]^2\,dt.$$
 
 The results are shown in Table 1, under the assumption that $H_0$ is rejected if the $p$-value falls below the $0.05$ threshold level.
 
@@ -69,7 +46,7 @@ The results are shown in Table 1, under the assumption that $H_0$ is rejected if
 |---|---:|---:|---|
 | Global functional $L^2$ test | 117.4368 | 0.0002 | Reject $H_0$ |
 
-The global test yields a $p$-value below the $0.05$ significance level. Therefore, the the null hypothesis that Tesla's mean intraday log-volatility proxy curve is flat is rejected.
+The global test yields a $p$-value below the $0.05$ significance level. Therefore, the null hypothesis that Tesla's mean intraday log-volatility proxy curve is flat is rejected.
 
 <details>
 <summary>R code</summary>
@@ -130,27 +107,15 @@ global_l2_results
 
 To identify where the mean curve differs from the flat null level, pointwise $t$-tests are also performed at each of the 25 intraday time points. For each time point $t_j$, the test statistic is
 
-$$
-t_j
-=
-\frac{
-\bar{Y}(t_j)-\hat{\mu}_0
-}{
-s(t_j)/\sqrt{n}
-},
-$$
+$$t_j=\frac{\bar{Y}(t_j)-\hat{\mu}_0}{s(t_j)/\sqrt{n}}.$$
 
 where $s(t_j)$ is the sample standard deviation of $Y_i(t_j)$ across days. The pointwise null and alternative hypotheses are
 
-$$
-H_{0,j}:\mu(t_j)=\mu_0,
-$$
+$$H_{0,j}:\mu(t_j)=\mu_0.$$
 
 and
 
-$$
-H_{1,j}:\mu(t_j)\neq \mu_0.
-$$
+$$H_{1,j}:\mu(t_j)\neq \mu_0.$$
 
 Because 25 pointwise tests are conducted, Bonferroni correction is applied to control for multiple testing.
 
@@ -221,65 +186,31 @@ The pointwise tests disclose that most time points are significantly different f
 
 The pattern is consistent with the idea that the beginning of the trading session reflects the market's adjustment to overnight information, pre-market news, and order imbalances accumulated before the open. As this information is gradually incorporated into prices, the average volatility level decreases. The absence of significance around midday indicates that this period is closest to the overall average volatility level.
 
-We find a strong evidence of a systematic intraday volatility pattern in Tesla's trading behavior: the mean log-volatility proxy is not constant over the day, with higher average volatility early in the session and lower average volatility later in the session.
+We find strong evidence of a systematic intraday volatility pattern in Tesla's trading behavior: the mean log-volatility proxy is not constant over the day, with higher average volatility early in the session and lower average volatility later in the session.
 
 ### COVID Structural Change in Mean Intraday Volatility Curves
 
-The COVID-19 period provides a natural breakpoint for assessing whether Tesla's intraday volatility dynamics entered a different regime. To evaluate this possibility, the smoothed log-volatility proxy curves are divided into pre-COVID and post-COVID samples using 11 March 2020 as the cutoff date, corresponding to the World Health Organization's declaration of COVID-19 as a global pandemic. As in the previous tests, the response variable is the smoothed intraday log-volatility proxy curve $Y_i(t)$, where $i$ indexes trading days and $t\in[0,1]$ denotes normalized intraday time. In the approximately independent subsample, The pre-COVID group contains 479 curves, while post-COVID group consists of 290 curves.
+The COVID-19 period provides a natural breakpoint for assessing whether Tesla's intraday volatility dynamics entered a different regime. To evaluate this possibility, the smoothed log-volatility proxy curves are divided into pre-COVID and post-COVID samples using 11 March 2020 as the cutoff date, corresponding to the World Health Organization's declaration of COVID-19 as a global pandemic. As in the previous tests, the response variable is the smoothed intraday log-volatility proxy curve $Y_i(t)$, where $i$ indexes trading days and $t\in[0,1]$ denotes normalized intraday time. In the approximately independent subsample, the pre-COVID group contains 479 curves, while post-COVID group consists of 290 curves.
 
 #### Hypotheses
 
 The null hypothesis is that the two mean intraday log-volatility proxy functions are identical over the full intraday domain:
 
-$$
-H_0:
-\mu_{\mathrm{pre}}(t)
-=
-\mu_{\mathrm{post}}(t),
-\qquad \forall t\in\mathcal{T}.
-$$
+$$H_0:\mu_{\mathrm{pre}}(t)=\mu_{\mathrm{post}}(t),\qquad \forall t\in\mathcal{T}.$$
 
 The alternative hypothesis is that the mean curves differ for at least some point of the trading day:
 
-$$
-H_1:
-\mu_{\mathrm{pre}}(t)
-\neq
-\mu_{\mathrm{post}}(t)
-\quad \text{for some } t\in\mathcal{T}.
-$$
+$$H_1:\mu_{\mathrm{pre}}(t)\neq\mu_{\mathrm{post}}(t)\quad \text{for some } t\in\mathcal{T}.$$
 
 #### Global Functional Test Results
 
 To test the global difference between the two mean curves, we use a two-sample functional $L^2$ statistic based on the integrated squared distance between the pre-COVID and post-COVID sample mean functions. Let
 
-$$
-\bar{Y}_{\mathrm{pre}}(t)
-=
-\frac{1}{n_1}
-\sum_{i\in \mathrm{pre}}
-Y_i(t)
-\quad and \quad
-\bar{Y}_{\mathrm{post}}(t)
-=
-\frac{1}{n_2}
-\sum_{i\in \mathrm{post}}
-Y_i(t)
-$$
+$$\bar{Y}_{\mathrm{pre}}(t)=\frac{1}{n_1}\sum_{i\in \mathrm{pre}}Y_i(t),\qquad \bar{Y}_{\mathrm{post}}(t)=\frac{1}{n_2}\sum_{i\in \mathrm{post}}Y_i(t).$$
 
 denote the two group mean curves. The test statistic is
 
-$$
-T
-=
-\int_{\mathcal{T}}
-\left[
-\bar{Y}_{\mathrm{pre}}(t)
--
-\bar{Y}_{\mathrm{post}}(t)
-\right]^2
-\,dt.
-$$
+$$T=\int_{\mathcal{T}}\left[\bar{Y}_{\mathrm{pre}}(t)-\bar{Y}_{\mathrm{post}}(t)\right]^2\,dt.$$
 
 **Table 3. Global functional test for pre-COVID versus post-COVID mean curves.**
 
@@ -369,39 +300,15 @@ The global test establishes that the two mean functions differ somewhere over th
 
 For each time point $t_j$, the pointwise null hypothesis is
 
-$$
-H_{0,j}:
-\mu_{\mathrm{pre}}(t_j)
-=
-\mu_{\mathrm{post}}(t_j),
-$$
+$$H_{0,j}:\mu_{\mathrm{pre}}(t_j)=\mu_{\mathrm{post}}(t_j).$$
 
 against the alternative
 
-$$
-H_{1,j}:
-\mu_{\mathrm{pre}}(t_j)
-\neq
-\mu_{\mathrm{post}}(t_j).
-$$
+$$H_{1,j}:\mu_{\mathrm{pre}}(t_j)\neq\mu_{\mathrm{post}}(t_j).$$
 
 The Welch statistic is used because the variability of the log-volatility curves may differ between the pre-COVID and post-COVID periods. For each time point, the statistic has the form
 
-$$
-t_j
-=
-\frac{
-\bar{Y}_{\mathrm{pre}}(t_j)
--
-\bar{Y}_{\mathrm{post}}(t_j)
-}{
-\sqrt{
-s_{\mathrm{pre}}^2(t_j)/n_1
-+
-s_{\mathrm{post}}^2(t_j)/n_2
-}
-},
-$$
+$$t_j=\frac{\bar{Y}_{\mathrm{pre}}(t_j)-\bar{Y}_{\mathrm{post}}(t_j)}{\sqrt{s_{\mathrm{pre}}^2(t_j)/n_1+s_{\mathrm{post}}^2(t_j)/n_2}}.$$
 
 where $s_{\mathrm{pre}}(t_j)$ and $s_{\mathrm{post}}(t_j)$ are the sample standard deviations at time $t_j$ in the two groups.
 
@@ -490,11 +397,11 @@ covid_pointwise_summary
 
 #### Interpretation
 
-The results indicate that there exists structural shift in Tesla's intraday log-volatility profile after the COVID break date. The global functional test rejects equality of the two mean curves, and the pointwise Welch tests show that the difference is significant at every intraday time point after Bonferroni correction.
+The results indicate that there exists a structural shift in Tesla's intraday log-volatility profile after the COVID break date. The global functional test rejects equality of the two mean curves, and the pointwise Welch tests show that the difference is significant at every intraday time point after Bonferroni correction.
 
 The direction of the effect is also consistent across the session. The difference is negative at all 25 time points, implying that the post-COVID period has a higher mean log-volatility proxy throughout the day.
 
-For the economical point of view, the post-COVID period includes a substantial increase in market uncertainty, a sharp rise in retail participation, large changes in Tesla's market capitalization, heightened sensitivity to macroeconomic news, and several episodes of extreme price movement. Tesla also became one of the most actively traded and closely followed stocks during this period. These factors can all contribute to a higher and more persistent intraday volatility regime.
+From an economic point of view, the post-COVID period includes a substantial increase in market uncertainty, a sharp rise in retail participation, large changes in Tesla's market capitalization, heightened sensitivity to macroeconomic news, and several episodes of extreme price movement. Tesla also became one of the most actively traded and closely followed stocks during this period. These factors can all contribute to a higher and more persistent intraday volatility regime.
 
 The analysis gives strong statistical evidence that Tesla's mean intraday log-volatility curve changed after the COVID break date. The post-COVID regime is characterized by higher log-volatility across the entire trading session, suggesting a broad upward shift in Tesla's intraday volatility structure rather than a localized change at only a few times of day.
 
@@ -550,55 +457,29 @@ monthly_curve_summary
 
 Let $X_m(t)$ denote the monthly mean log-volatility proxy curve for month $m$, where $m=1,\ldots,M$ and $M=187$. The null hypothesis states that the mean function is constant over time:
 
-$$
-H_0:
-\mu_1(t)=\mu_2(t)=\cdots=\mu_M(t),
-\qquad \forall t\in\mathcal{T}.
-$$
+$$H_0:\mu_1(t)=\mu_2(t)=\cdots=\mu_M(t),\qquad \forall t\in\mathcal{T}.$$
 
 The alternative hypothesis allows for one unknown structural break. That is, there exists a change point $k^\ast$ such that
 
-$$
-H_1:
-\mu_1(t)=\cdots=\mu_{k^\ast}(t)
-\neq
-\mu_{k^\ast+1}(t)=\cdots=\mu_M(t),
-\qquad \text{for some } t\in\mathcal{T}.
-$$
+$$H_1:\mu_1(t)=\cdots=\mu_{k^\ast}(t)\neq\mu_{k^\ast+1}(t)=\cdots=\mu_M(t),\qquad \text{for some } t\in\mathcal{T}.$$
 
 Unlike the previous pre/post COVID test, the breakpoint is not fixed in advance but is estimated from the functional time series.
 
 #### Projection-Based Test Results
 
-Firstly, we center the monthly curves and project them onto the leading principal components. Here $\xi_{m\ell}$ denotes the score of month $m$ on principal component $\ell$, and $\lambda_\ell$ is the corresponding eigenvalue.The number of retained principal components, $d$, is selected using an 85% fraction-of-variance-explained rule, which in our case resulted in the first principal component alone being sufficient, so $d=1$.
+Firstly, we center the monthly curves and project them onto the leading principal components. Here $\xi_{m\ell}$ denotes the score of month $m$ on principal component $\ell$, and $\lambda_\ell$ is the corresponding eigenvalue. The number of retained principal components, $d$, is selected using an 85% fraction-of-variance-explained rule, which in our case resulted in the first principal component alone being sufficient, so $d=1$.
 
 For each candidate breakpoint $k$, the test computes cumulative deviations of the projected scores from their overall mean level:
 
-$$
-C_{k\ell}
-=
-\sum_{m=1}^{k}\xi_{m\ell}
--
-\frac{k}{M}
-\sum_{m=1}^{M}\xi_{m\ell}.
-$$
+$$C_{k\ell}=\sum_{m=1}^{k}\xi_{m\ell}-\frac{k}{M}\sum_{m=1}^{M}\xi_{m\ell}.$$
 
 The corresponding projected change-point statistic is
 
-$$
-T_k
-=
-\sum_{\ell=1}^{d}
-\frac{C_{k\ell}^2}{M\lambda_\ell}.
-$$
+$$T_k=\sum_{\ell=1}^{d}\frac{C_{k\ell}^2}{M\lambda_\ell}.$$
 
 The overall test statistic is the maximum over all possible break locations:
 
-$$
-T_{\max}
-=
-\max_{1\leq k<M} T_k.
-$$
+$$T_{\max}=\max_{1\leq k<M}T_k.$$
 
 **Table 5. Projection-based change-point test for the monthly mean log-volatility function.**
 
@@ -612,7 +493,7 @@ $$
 | Estimated break interval | 2019-12 to 2020-01 |
 | Decision | Reject $H_0$ |
 
-As presented in the Table 5, the statistic's $p$-value is below the significance threshold, thus, the null hypothesis of a time-stable mean function is rejected. The estimated break occurs between December 2019 and January 2020, indicating a structural shift in Tesla's mean intraday log-volatility curve around the beginning of 2020.
+As presented in Table 5, the statistic's $p$-value is below the significance threshold, thus, the null hypothesis of a time-stable mean function is rejected. The estimated break occurs between December 2019 and January 2020, indicating a structural shift in Tesla's mean intraday log-volatility curve around the beginning of 2020.
 
 <details>
 <summary>R code</summary>
@@ -754,26 +635,17 @@ Overall, the change-point test strengthens the evidence from the fixed-date COVI
 
 The analysis of weekday effect on mean function curve is conducted for three functional responses: the smoothed log-volatility proxy curves, the log-volume curves, and the normalized volume-share curves. The main object of interest is the smoothed intraday log-volatility proxy curve,
 
-$$
-Y_i(t) = \log\left(Z_i(t)^2\right) - q_0,
-$$
+$$Y_i(t)=\log\left(Z_i(t)^2\right)-q_0.$$
 
 where $i$ indexes trading days, $t\in[0,1]$ denotes normalized intraday time, $Z_i(t)$ is the scaled intraday log-return, and $q_0 = E[\log(W^2)]$ for $W\sim N(0,1)$.
 
 In addition to volatility, we also consider volume-based functional responses. Let $Q_i(t_j)$ denote Tesla's volume on day $i$ at intraday bar $j$. The log-volume curve is defined as
 
-$$
-L_i(t_j)=\log\left(1+Q_i(t_j)\right),
-$$
+$$L_i(t_j)=\log\left(1+Q_i(t_j)\right).$$
 
 while the normalized volume-share curve is defined as
 
-$$
-S_i(t_j)
-=
-\frac{Q_i(t_j)}
-{\sum_{\ell=1}^{26} Q_i(t_\ell)}.
-$$
+$$S_i(t_j)=\frac{Q_i(t_j)}{\sum_{\ell=1}^{26}Q_i(t_\ell)}.$$
 
 The log-volume curve measures absolute trading intensity, whereas the normalized volume-share curve measures the relative timing of trading activity within the day. To reduce serial dependence between consecutive trading days, the weekday analysis is performed on the approximately independent subsample rather than on the full daily dataset, as defined earlier.
 
@@ -781,71 +653,29 @@ The log-volume curve measures absolute trading intensity, whereas the normalized
 
 For a generic functional response $X_i(t)$, let
 
-$$
-\mu_g(t)=E[X_i(t)\mid G_i=g]
-$$
+$$\mu_g(t)=E[X_i(t)\mid G_i=g]$$
 
 denote the weekday-specific mean function. The null hypothesis is that all weekday mean functions are identical:
 
-$$
-H_0:
-\mu_{\text{Mon}}(t)
-=
-\mu_{\text{Tue}}(t)
-=
-\mu_{\text{Wed}}(t)
-=
-\mu_{\text{Thu}}(t)
-=
-\mu_{\text{Fri}}(t),
-\qquad \forall t\in\mathcal{T}.
-$$
+$$H_0:\mu_{\text{Mon}}(t)=\mu_{\text{Tue}}(t)=\mu_{\text{Wed}}(t)=\mu_{\text{Thu}}(t)=\mu_{\text{Fri}}(t),\qquad \forall t\in\mathcal{T}.$$
 
 The alternative hypothesis is that at least one weekday mean function differs:
 
-$$
-H_1:
-\exists\, g\neq h
-\text{ such that }
-\mu_g(t)\neq \mu_h(t)
-\text{ for some } t\in\mathcal{T}.
-$$
+$$H_1:\exists\, g\neq h \text{ such that } \mu_g(t)\neq \mu_h(t)\text{ for some } t\in\mathcal{T}.$$
 
 #### Global Test Results
 
 The global weekday-effect hypothesis is tested using a functional one-way ANOVA statistic, which is based on integrated squared deviations from the grand mean. The weekday-specific sample mean curve is
 
-$$
-\bar{X}_g(t)
-=
-\frac{1}{n_g}
-\sum_{i\in\mathcal{I}_g}
-X_i(t),
-$$
+$$\bar{X}_g(t)=\frac{1}{n_g}\sum_{i\in\mathcal{I}_g}X_i(t).$$
 
 and the grand mean curve is
 
-$$
-\bar{X}(t)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-X_i(t).
-$$
+$$\bar{X}(t)=\frac{1}{n}\sum_{i=1}^{n}X_i(t).$$
 
 The global functional ANOVA statistic is
 
-$$
-T
-=
-\sum_{g=1}^{5}
-n_g
-\int_{\mathcal{T}}
-\left[
-\bar{X}_g(t)-\bar{X}(t)
-\right]^2
-\,dt.
-$$
+$$T=\sum_{g=1}^{5}n_g\int_{\mathcal{T}}\left[\bar{X}_g(t)-\bar{X}(t)\right]^2\,dt.$$
 
 The global weekday-effect test was applied separately to the smoothed log-volatility curves, log-volume curves, and normalized volume-share curves. The results of the hypothesis testing are present in Table 6, under the assumption that $H_0$ is rejected if the $p$-value falls below the $0.05$ threshold level.
 
@@ -992,30 +822,15 @@ global_weekday_results
 
 Because the global test for normalized volume-share curves is significant, post-hoc pairwise functional comparisons are used to identify which weekday pairs drive the rejection. For each pair of weekday groups $g$ and $h$, the pairwise null hypothesis is that the two weekday mean functions are identical over the full intraday domain:
 
-$$
-H_{0,gh}:\mu_g(t)=\mu_h(t),
-\qquad \forall t\in\mathcal{T}.
-$$
+$$H_{0,gh}:\mu_g(t)=\mu_h(t),\qquad \forall t\in\mathcal{T}.$$
 
 The corresponding alternative hypothesis is that the two mean functions differ for at least some intraday time point:
 
-$$
-H_{1,gh}:\mu_g(t)\neq \mu_h(t)
-\quad \text{for some } t\in\mathcal{T}.
-$$
+$$H_{1,gh}:\mu_g(t)\neq \mu_h(t)\quad \text{for some } t\in\mathcal{T}.$$
 
 The hypothesis is tested using the two-sample functional $L^2$-statistic:
 
-$$
-T_{gh}
-=
-\frac{n_g n_h}{n_g+n_h}
-\int_{\mathcal{T}}
-\left[
-\bar{X}_g(t)-\bar{X}_h(t)
-\right]^2
-\,dt
-$$
+$$T_{gh}=\frac{n_g n_h}{n_g+n_h}\int_{\mathcal{T}}\left[\bar{X}_g(t)-\bar{X}_h(t)\right]^2\,dt.$$
 
 with Holm corrections applied to control for multiple permutation testing.
 
@@ -1160,10 +975,7 @@ Overall, the weekday-effect analysis supports the following conclusion: there is
 
 This section investigates whether Tesla's intraday log-volatility proxy $Y_i(t)$ differs systematically between the morning and afternoon parts of the trading session. Each daily curve is split into two parts: the first 12 intraday return observations are treated as the morning segment $M_i$, and the remaining 13 observations are treated as the afternoon segment $A_i$. Since the two segments contain different numbers of observations, both are interpolated onto a common normalized grid $u\in[0,1]$. The paired difference curve is defined as
 
-$$
-D_i(u)=M_i(u)-A_i(u),
-\qquad u\in[0,1].
-$$
+$$D_i(u)=M_i(u)-A_i(u),\qquad u\in[0,1].$$
 
 Positive values of $D_i(u)$ therefore indicate that the morning log-volatility proxy is higher than the afternoon log-volatility proxy at the corresponding relative position within the half-session.
 
@@ -1171,40 +983,21 @@ Positive values of $D_i(u)$ therefore indicate that the morning log-volatility p
 
 The null hypothesis is that the mean morning and afternoon volatility curves are equal over the full normalized half-session domain:
 
-$$
-H_0:\mu_D(u)=E[D_i(u)]=0,
-\qquad \forall u\in[0,1],
-$$
+$$H_0:\mu_D(u)=E[D_i(u)]=0,\qquad \forall u\in[0,1].$$
 
 The alternative hypothesis is that the two mean curves differ for at least some relative time point:
 
-$$
-H_1:\mu_D(u)\neq 0
-\quad \text{for some } u\in[0,1].
-$$
+$$H_1:\mu_D(u)\neq 0\quad \text{for some } u\in[0,1].$$
 
 #### Functional Paired Test Results
 
 As the morning and afternoon curves are observed for the same trading day, the hypothesis is tested using a paired one-sample functional $L^2$-statistic applied to the difference curves:
 
-$$
-T
-=
-n
-\int_0^1
-\bar{D}(u)^2
-\,du,
-$$
+$$T=n\int_0^1\bar{D}(u)^2\,du.$$
 
 where $\bar{D}(u)$ is the sample mean difference curve
 
-$$
-\bar{D}(u)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-D_i(u).
-$$
+$$\bar{D}(u)=\frac{1}{n}\sum_{i=1}^{n}D_i(u).$$
 
 **Table 8. Paired functional test for morning-afternoon volatility difference.**
 
@@ -1303,33 +1096,19 @@ morning_afternoon_results
 
 As a robustness check, we also compare the integrated morning and afternoon curves. For each day, define
 
-$$
-\Delta_i
-=
-\int_0^1 M_i(u)\,du
--
-\int_0^1 A_i(u)\,du.
-$$
+$$\Delta_i=\int_0^1M_i(u)\,du-\int_0^1A_i(u)\,du.$$
 
 The scalar paired $t$-test evaluates
 
-$$
-H_0:E[\Delta_i]=0
-$$
+$$H_0:E[\Delta_i]=0$$
 
 against
 
-$$
-H_1:E[\Delta_i]\neq 0.
-$$
+$$H_1:E[\Delta_i]\neq 0.$$
 
 The mean integrated difference is positive and $t$-test gives a $p$-value below 5%:
 
-$$
-\bar{\Delta}=0.704377
-\qquad
-p<0.001
-$$
+$$\bar{\Delta}=0.704377,\qquad p<0.001.$$
 
 Therefore, the scalar integrated $t$-test also rejects the null hypothesis and supports the conclusion that the morning segment has higher average log-volatility than the afternoon segment.
 
@@ -1372,15 +1151,13 @@ integrated_halfday_results
 
 The functional test shows that the morning and afternoon mean log-volatility proxy curves are significantly different. The estimated mean difference curve,
 
-$$
-\bar{D}(u)=\bar{M}(u)-\bar{A}(u),
-$$
+$$\bar{D}(u)=\bar{M}(u)-\bar{A}(u).$$
 
 is positive across the normalized half-session domain, which indicates that the morning volatility level is systematically higher than the afternoon volatility level. The visual comparison of the mean morning and afternoon curves also suggests that the two curves are approximately parallel, so the difference appears mainly as a level shift rather than a strong shape difference.
 
 Economically, this result is consistent with the idea that the beginning of the trading day incorporates overnight information, pre-market news, order imbalances, and broader market uncertainty accumulated before the market opens. These effects can lead to stronger price movements and higher volatility early in the session. By contrast, the afternoon session may reflect a more stabilized information environment after the initial price adjustment has occurred.
 
-Overall, the morningafternoon analysis provides statistically significant evidence of intraday asymmetry in Tesla's volatility profile: the morning part of the session exhibits higher log-volatility than the afternoon part, and this difference remains positive across the normalized half-session domain.
+Overall, the morning-afternoon analysis provides statistically significant evidence of intraday asymmetry in Tesla's volatility profile: the morning part of the session exhibits higher log-volatility than the afternoon part, and this difference remains positive across the normalized half-session domain.
 
 | Mean morning and afternoon curves | Mean difference curve |
 |---|---|
