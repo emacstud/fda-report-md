@@ -19,7 +19,7 @@ denote the mean intraday log-volatility curve, and let
 $$
 \mu_0
 =
-\frac{1}{|\mathcal{T}|}
+\frac{1}{\lvert \mathcal{T} \rvert}
 \int_{\mathcal{T}} \mu(t)\,dt
 $$
 
