@@ -16,12 +16,7 @@ $$
 
 denote the mean intraday log-volatility curve, and let
 
-$$
-\mu_0
-=
-\frac{1}{\lvert \mathcal{T} \rvert}
-\int_{\mathcal{T}} \mu(t)\,dt
-$$
+$$\mu_0 = \frac{1}{\lvert \mathcal{T} \rvert}\int_{\mathcal{T}} \mu(t)\,dt$$
 
 denote the flat mean level. In the empirical implementation, this flat level is estimated by the grand mean of all observed smoothed log-volatility values $\hat{\mu}_0=-8.2866$. The test is designed to determine whether the mean curve is flat around its own overall average level, or whether it varies systematically over the trading session.
 
