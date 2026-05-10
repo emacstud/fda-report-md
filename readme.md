@@ -4,6 +4,8 @@
 
 The section presents 5 inferential tests used to assess Tesla's intraday functional patterns. We test whether the mean log-volatility curve is flat over the trading day, whether the volatility structure changed around the COVID period, whether structural breaks are present in the mean function, whether weekday effects exist in volatility and volume-related curves, and whether morning and afternoon volatility profiles differ. All hypothesis tests are conducted at the $0.05$ significance level, unless stated otherwise.
 
+---
+
 ### Intraday Pattern in the Mean Log-Volatility Curve
 
 This hypothesis tests whether Tesla's mean intraday log-volatility proxy curve is constant across the trading day or whether it exhibits a systematic intraday pattern. The analysis is based on the smoothed log-volatility proxy curves $Y_i(t)$ from the approximately independent subsample, consisting of 769 days, where $i$ indexes trading days and $t\in[0,1]$ denotes normalized intraday time.
@@ -187,6 +189,8 @@ The pointwise tests disclose that most time points are significantly different f
 The pattern is consistent with the idea that the beginning of the trading session reflects the market's adjustment to overnight information, pre-market news, and order imbalances accumulated before the open. As this information is gradually incorporated into prices, the average volatility level decreases. The absence of significance around midday indicates that this period is closest to the overall average volatility level.
 
 We find strong evidence of a systematic intraday volatility pattern in Tesla's trading behavior: the mean log-volatility proxy is not constant over the day, with higher average volatility early in the session and lower average volatility later in the session.
+
+---
 
 ### COVID Structural Change in Mean Intraday Volatility Curves
 
@@ -409,6 +413,8 @@ The analysis gives strong statistical evidence that Tesla's mean intraday log-vo
 |---|---|
 | ![](figures/covid_mean_curves.png) | ![](figures/covid_difference_curve.png) |
 
+---
+
 ### Projection-Based Change-Point Test for the Mean Volatility Function
 
 The previous COVID structural-change analysis imposed a fixed break date, 11 March 2020, and compared the mean intraday volatility curves before and after that date. A complementary approach is to estimate the break date directly from the data. For this purpose, we apply a projection-based change-point test to determine whether mean intraday log-volatility curve remains stable over time or whether there is evidence of a structural shift in the mean function.
@@ -630,6 +636,8 @@ Overall, the change-point test strengthens the evidence from the fixed-date COVI
 |  Projection-based change-point statistic with estimated break | Mean monthly log-volatility curves before and after the estimated break |
 |---|---|
 | ![](figures/cp_statistic.png) | ![](figures/pre_post_break_curves.png) |
+
+---
 
 ### Weekday Effect on Mean Functional Curves
 
@@ -971,6 +979,8 @@ Similarly, the log-volume results provide no evidence that absolute intraday tra
 
 Overall, the weekday-effect analysis supports the following conclusion: there is no statistically significant weekday effect in Tesla's mean intraday log-volatility curve or in its absolute log-volume curve, but there is significant evidence of a weekday effect in the relative intraday allocation of trading volume, mainly driven by the Tuesday-Friday comparison.
 
+---
+
 ### Morning-Afternoon Difference in Intraday Volatility Curves
 
 This section investigates whether Tesla's intraday log-volatility proxy $Y_i(t)$ differs systematically between the morning and afternoon parts of the trading session. Each daily curve is split into two parts: the first 12 intraday return observations are treated as the morning segment $M_i$, and the remaining 13 observations are treated as the afternoon segment $A_i$. Since the two segments contain different numbers of observations, both are interpolated onto a common normalized grid $u\in[0,1]$. The paired difference curve is defined as
@@ -1162,6 +1172,8 @@ Overall, the morning-afternoon analysis provides statistically significant evide
 | Mean morning and afternoon curves | Mean difference curve |
 |---|---|
 | ![](figures/morning_afternoon_means.png) | ![](figures/difference_curve.png) |
+
+---
 
 ### Hypothesis Testing Summary
 
